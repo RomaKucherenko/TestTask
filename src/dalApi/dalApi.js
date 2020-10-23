@@ -21,3 +21,9 @@ export const requestUsersServer = () => {
         response => console.log(response)
     )
 }
+
+export const updateUserServer = userData => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => resolve('userUpdate'),1000)
+    })
+}

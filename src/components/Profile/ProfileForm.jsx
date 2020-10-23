@@ -3,15 +3,20 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {Field, reduxForm} from "redux-form";
 import {Input} from "../../common/FormControls/FormControls";
-import { correctFirstname, correctLastname,correctUsername,maxLengthCreator,requiredField
+import {
+    correctFirstname, correctLastname, correctUsername, maxLengthCreator, requiredField
 } from "../../validators/userValidator";
 import formStyles from "../../common/FormControls/FormControls.module.css"
-import * as _ from "underscore";
+import * as underscore from "underscore";
 
 let max150 = maxLengthCreator(150)
 let max30 = maxLengthCreator(30)
 
 const EditProfileForm = (props) => {
+    const onCancelClick = (e) => {
+        e.preventDefault()
+        props.onCancelClick()
+    }
     return <form onSubmit={props.handleSubmit}>
         <div>
             Username:
@@ -38,6 +43,7 @@ const EditProfileForm = (props) => {
         {props.error ? <span className={formStyles.Error}>{props.error}</span> : null}
         <div>
             <button disabled={props.isSubmitting}>Save Changes</button>
+            <button onClick={onCancelClick}>CANCEL</button>
         </div>
     </form>
 }
@@ -53,28 +59,32 @@ const mapStateToProps = state => {
 }
 
 const EditProfileReduxForm = compose(
-    connect(mapStateToProps, null),
+    connect(mapStateToProps, {}),
     reduxForm({
         form: "editProfile"
     })
 )(EditProfileForm)
 
 const EditProfile = (props) => {
+
     let [isSubmitting, setSubmitting] = useState(false)
     const handleSubmit = (formData) => {
         setSubmitting(true)
         let {username, first_name, last_name} = props.userProfile
-        if (_.isEqual({username, first_name, last_name}, formData)) {
+        if (underscore.isEqual({username, first_name, last_name}, formData)) {
             setSubmitting(false)
-            props.setEditStatus(false)
         } else {
-            props.updateUser(formData)
-            setSubmitting(false)
-            props.setEditStatus(false)
+            props.updateUser(formData).then(
+                response => {
+                    setSubmitting(false)
+                    props.onSuccess()
+                }
+            )
         }
     }
-    return <EditProfileReduxForm onSubmit={handleSubmit} setSubmitting={setSubmitting}
-                                 isSubmitting={isSubmitting}/>
+    return <EditProfileReduxForm onSubmit={handleSubmit}
+                                 isSubmitting={isSubmitting}
+                                 onCancelClick={props.onCancelClick}/>
 }
 
 export default EditProfile

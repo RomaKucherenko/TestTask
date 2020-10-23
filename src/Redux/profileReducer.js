@@ -1,4 +1,5 @@
 import {requestUserProfileAPI} from "../Server/Users";
+import {updateUserServer} from "../dalApi/dalApi";
 
 const SET_USER_PROFILE = `SET_USER_PROFILE`;
 
@@ -32,11 +33,11 @@ export const requestUserProfile = (userId) => {
 }
 
 export const updateUser = userProfile => {
-    console.log(`userUpdated`)
     return async dispatch => {
-        //Будем считать что здесь делается patch запрос на сервер))
-        //Он же может решать изменяем ли мы данные или нет
+        let response = await updateUserServer(userProfile)
+        return response
     }
+
 }
 
 export default profileReducer
