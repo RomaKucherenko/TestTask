@@ -26,7 +26,7 @@ export const passwordInput = ({input, meta, ...props}) => {
         <>
             <div className={styles.Input}>
                 <input {...input} {...props} className={hasError ? styles.Error : ""}/>
-                <span onClick={setType}>Show</span>
+                <span onClick={setType} className={styles.ShowLabel}>Show</span>
             </div>
             {hasError && <div>
                 <span className={styles.ErrorSpan}>{meta.error}</span>

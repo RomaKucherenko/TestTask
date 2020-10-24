@@ -12,22 +12,22 @@ import {compose} from "redux";
 let max150 = maxLengthCreator(150)
 let max128 = maxLengthCreator(128)
 const LoginForm = (props) => {
-    return <form onSubmit={props.handleSubmit}>
-        <div>
+    return <form onSubmit={props.handleSubmit} className={styles.LoginForm}>
+        <div className={styles.LoginInputWrapper}>
             <Field component={Input}
                    validate={[requiredField, correctUsername, max150]}
                    name={"username"}
                    placeholder={"Login"}
             />
         </div>
-        <div>
+        <div className={styles.LoginInputWrapper}>
             <Field component={Input} type={"text"}
                    name={"password"} placeholder={"Password"}
                    validate={[requiredField, correctPassword, max128]}/>
         </div>
         {props.error ? <span className={formStyles.Error}>{props.error}</span> : null}
         <div>
-            <button disabled={props.isSubmitting}>Войти в IT</button>
+            <button disabled={props.isSubmitting} className={styles.LoginSubmitButton}>Войти в IT</button>
         </div>
     </form>
 }
@@ -51,7 +51,7 @@ const Login = (props) => {
     }
     return (
         <div className={styles.Login}>
-            <h1>Login</h1>
+            <h1 className={styles.LoginHeading}>Login</h1>
             <LoginReduxForm onSubmit={onSubmit} setSubmitting={setSubmitting}
                             isSubmitting={isSubmitting}/>
         </div>

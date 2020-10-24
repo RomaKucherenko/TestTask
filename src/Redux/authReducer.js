@@ -1,5 +1,5 @@
-import {loginAPI} from "../dalApi/dalApi";
-import {stopSubmit} from "redux-form";
+import { loginAPI } from "../dalApi/dalApi";
+import { stopSubmit } from "redux-form";
 
 const SET_AUTH_DATA = "SET_AUTH_DATA"
 
@@ -32,5 +32,7 @@ export const login = (username, password) => async dispatch => {
         dispatch(setAuthDataAction(response.data.token))
     }
 }
+
+
 
 export default authReducer

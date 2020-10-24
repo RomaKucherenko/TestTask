@@ -50,5 +50,9 @@ export const requestUserProfileAPI = (userId) => {
         }
     })
 }
-
+export const createUserAPI = userData => {
+    return new Promise((resolve, reject) => {
+        resolve('accept')
+    })
+}
 window.Users = Users

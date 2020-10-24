@@ -10,26 +10,23 @@ import {
     correctUsername,
     maxLengthCreator,
     requiredField,
-    uniqueUsernameCreator
 } from "../../../validators/createUserValidator";
 import {compose} from "redux";
-import {connect} from "react-redux";
-import {getUsernames} from "../../../Redux/Selectors/usersSelector";
 import validate from "../../../validators/validate";
 
 let max150 = maxLengthCreator(150)
 let max30 = maxLengthCreator(30)
 
 const CreateUserForm = (props) => {
-    let uniqueUsername = uniqueUsernameCreator(props.usernames)
     let [typeConfirmPassword, setTypeConfirmPassword] = useState("password")
     let [typePassword, setTypePassword] = useState("password")
+
     return <form onSubmit={props.handleSubmit}>
         <div>
             <div>
                 <label htmlFor="username">Username:</label>
                 <Field component={Input}
-                       validate={[requiredField, correctUsername, max150, uniqueUsername]}
+                       validate={[requiredField, correctUsername, max150]}
                        name="username"
                        id="username"
                        placeholder="Username"
@@ -83,14 +80,7 @@ const CreateUserForm = (props) => {
     </form>
 }
 
-const mapStateToProps = state => {
-    return {
-        usernames: getUsernames(state)
-    }
-}
-
 const CreateUserReduxForm = compose(
-    connect(mapStateToProps, null),
     reduxForm({
         form: "createUser",
         validate
@@ -99,9 +89,10 @@ const CreateUserReduxForm = compose(
 const CreateUser = (props) => {
     let [isSubmitting, setSubmitting] = useState(false)
     const handleSubmit = (formData) => {
-        console.log(formData)
+        props.createNewUser(formData)
     }
-    return <CreateUserReduxForm onSubmit={handleSubmit} setSubmitting={setSubmitting}
+    return <CreateUserReduxForm onSubmit={handleSubmit}
+                                setSubmitting={setSubmitting}
                                 isSubmitting={isSubmitting}/>
 }
 

@@ -1,0 +1,35 @@
+.Login {
+
+}
+
+.LoginForm {
+    margin: 0 auto;
+    width: 300px;
+}
+
+.LoginHeading {
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0 0 15px;
+    text-align: center;
+}
+
+.LoginInputWrapper {
+    margin: 0 0 10px;
+}
+
+.LoginSubmitButton {
+    width: 100%;
+    outline: none;
+    cursor: pointer;
+    height: 40px;
+    font-size: 16px;
+    background: dodgerblue;
+    color: white;
+    border: 0;
+    transition-duration: 200ms;
+}
+
+.LoginSubmitButton:hover {
+    background: royalblue;
+}

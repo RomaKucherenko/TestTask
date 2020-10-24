@@ -1,5 +1,4 @@
 const validate = values => {
-    console.log(`validate`, values)
     const errors = {};
 
     if (values.confirmPassword !== values.password) {

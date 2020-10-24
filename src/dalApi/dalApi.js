@@ -1,4 +1,5 @@
 import * as axios from "axios"
+import {createUserAPI} from "../Server/Users";
 
 const instance = axios.create({
     baseURL:"https://emphasoft-test-assignment.herokuapp.com/"
@@ -21,7 +22,9 @@ export const requestUsersServer = () => {
         response => console.log(response)
     )
 }
-
+export const createNewUserServer = async userData => {
+    return await createUserAPI(userData)
+}
 export const updateUserServer = userData => {
     return new Promise((resolve, reject) => {
         setTimeout(() => resolve('userUpdate'),1000)

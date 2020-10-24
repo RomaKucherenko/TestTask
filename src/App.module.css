@@ -1,0 +1,20 @@
+.App {
+    width: 960px;
+    margin: 0 auto;
+    background-color: #E0E0E0;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+@media(max-width: 959px) {
+    .App {
+        width: 768px
+    }
+}
+
+@media(max-width: 767px) {
+    .App {
+        width: 100%;
+        min-width: 320px;
+    }
+}
