@@ -4,6 +4,7 @@ import {requestUserProfile, updateUser} from "../../Redux/profileReducer";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import EditProfile from "./ProfileForm";
+//import {updateUser} from "../../Redux/usersReducer";
 
 const Profile = props => {
     let [isEditing, setEditing] = useState(false)
@@ -29,7 +30,8 @@ const Profile = props => {
                 <EditProfile userProfile={props.userProfile}
                              updateUser={props.updateUser}
                              onCancelClick={onEditProfileCancelClick}
-                             onSuccess={onEditProfileSuccess}/>
+                             onSuccess={onEditProfileSuccess}
+                             userId={props.match.params.userId}/>
                 :
                 <div>
                     <div>Username: {props.userProfile.username}</div>

@@ -38,7 +38,7 @@ const Users = (props) => {
     return (
         <>
             <div>
-                <input value={filterValue} onChange={onFilterValueChange}/>
+                <input value={filterValue} onChange={onFilterValueChange} placeholder="Начните вводить Username"/>
                 <button onClick={onSortByIdClick}>Sort By Id</button>
                 <NavLink to="/Users/create">
                     <button>Create new User</button>

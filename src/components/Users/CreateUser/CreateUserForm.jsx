@@ -9,10 +9,11 @@ import {
     correctPassword,
     correctUsername,
     maxLengthCreator,
-    requiredField,
+    requiredField
 } from "../../../validators/createUserValidator";
 import {compose} from "redux";
 import validate from "../../../validators/validate";
+import {withRouter} from "react-router-dom";
 
 let max150 = maxLengthCreator(150)
 let max30 = maxLengthCreator(30)
@@ -89,12 +90,18 @@ const CreateUserReduxForm = compose(
 const CreateUser = (props) => {
     let [isSubmitting, setSubmitting] = useState(false)
     const handleSubmit = (formData) => {
-        props.createNewUser(formData)
+        props.createNewUser(formData).then(
+            canRedirect => {
+                if(canRedirect){
+                    props.history.push("/Users")
+                }
+            }
+        )
     }
     return <CreateUserReduxForm onSubmit={handleSubmit}
                                 setSubmitting={setSubmitting}
                                 isSubmitting={isSubmitting}/>
 }
 
-export default CreateUser
+export default withRouter(CreateUser)
 

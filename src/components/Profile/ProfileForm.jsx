@@ -73,9 +73,9 @@ const EditProfile = (props) => {
         let {username, first_name, last_name} = props.userProfile
         if (underscore.isEqual({username, first_name, last_name}, formData)) {
             setSubmitting(false)
+            props.onSuccess()
         } else {
-            props.updateUser(formData).then(
-                response => {
+            props.updateUser({...formData, id: props.userId}).then(() => {
                     setSubmitting(false)
                     props.onSuccess()
                 }

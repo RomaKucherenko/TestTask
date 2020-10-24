@@ -1,20 +1,18 @@
 import React from "react";
-import {getUsernames} from "../../../Redux/Selectors/usersSelector";
 import {connect} from "react-redux";
 import CreateUserForm from "./CreateUserForm";
 import styles from "./CreateUser.module.css"
 import {createNewUser} from "../../../Redux/usersReducer";
+import {NavLink} from "react-router-dom";
 
 const CreateUser = props => {
     return <div className={styles.CreateUserForm}>
         <CreateUserForm createNewUser={props.createNewUser}/>
+        <NavLink to="/Users">
+            <button>Back to Users</button>
+        </NavLink>
     </div>
 }
 
-const mapStateToProps = state => {
-    return {
-        usernames: getUsernames(state)
-    }
-}
 
 export default connect(null, {createNewUser})(CreateUser)
