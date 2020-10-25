@@ -13,6 +13,7 @@ import styles from "./App.module.css"
 const App = (props) => {
     return (
         <div className={styles.App}>
+            {/*Проверка на авторизацию*/}
             {props.isAuth ?
                 <div className={styles.App}>
                     <Route exact path="/Users" render={() => <Users/>}/>

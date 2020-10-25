@@ -1,0 +1,14 @@
+.ProfileSubmitButton {
+    width: 80%;
+    outline: none;
+    cursor: pointer;
+    height: 40px;
+    font-size: 16px;
+    background: dodgerblue;
+    color: white;
+    border: 0;
+    transition-duration: 200ms;
+}
+.ProfileSubmitButton:hover {
+    background: royalblue;
+}

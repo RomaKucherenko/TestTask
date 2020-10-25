@@ -4,7 +4,6 @@ import {requestUserProfile, updateUser} from "../../Redux/profileReducer";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import EditProfile from "./ProfileForm";
-//import {updateUser} from "../../Redux/usersReducer";
 
 const Profile = props => {
     let [isEditing, setEditing] = useState(false)

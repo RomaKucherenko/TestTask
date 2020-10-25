@@ -11,8 +11,7 @@ const useRequestUsers = props => {
     }, [])
 }
 const Users = (props) => {
-    let [pageUsers, setPageUsers] = useState(props.users)//PageUsers-отображаемые на UI
-    //let [users, setUsers] = useState(props.users) //TRUE Users хранят состояние 10users sorted by id
+    let [pageUsers, setPageUsers] = useState(props.users)
 
     let [filterValue, setFilterValue] = useState("")
     useRequestUsers(props)

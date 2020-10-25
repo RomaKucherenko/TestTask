@@ -5,7 +5,7 @@ const SET_USER_PROFILE = `SET_USER_PROFILE`;
 const UPDATE_USER = "UPDATE_USER"
 
 let initialState = {
-    userProfile: null, //мы взяли null, чтобы потом if'ом проверить (в ProfileInfo.jsx)
+    userProfile: null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -18,8 +18,6 @@ const profileReducer = (state = initialState, action) => {
         }
         case UPDATE_USER:
             return {
-                //по идеи нам нужны только id and username значит надо
-                // реализовать такую логику что только эти данные мы будем хранить
                 ...state,
                 userProfile: {...action.userData}
             }

@@ -2,16 +2,16 @@ import {connect} from "react-redux"
 import React, {useEffect, useState} from "react"
 import {Field, reduxForm} from "redux-form";
 import formStyles from "../../common/FormControls/FormControls.module.css"
-import {Input} from "../../common/FormControls/FormControls";
+import {Input, passwordInput} from "../../common/FormControls/FormControls";
 import {correctPassword, correctUsername, maxLengthCreator, requiredField} from "../../validators/loginValidator";
 import {login} from "../../Redux/authReducer";
 import styles from "./Login.module.css"
-import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 
 let max150 = maxLengthCreator(150)
 let max128 = maxLengthCreator(128)
 const LoginForm = (props) => {
+    let [typePassword, setTypePassword] = useState("password")
     return <form onSubmit={props.handleSubmit} className={styles.LoginForm}>
         <div className={styles.LoginInputWrapper}>
             <Field component={Input}
@@ -21,9 +21,11 @@ const LoginForm = (props) => {
             />
         </div>
         <div className={styles.LoginInputWrapper}>
-            <Field component={Input} type={"text"}
+            <Field component={passwordInput} type={"text"}
                    name={"password"} placeholder={"Password"}
-                   validate={[requiredField, correctPassword, max128]}/>
+                   validate={[requiredField, correctPassword, max128]}
+                   type={typePassword}
+                   setType={setTypePassword}/>
         </div>
         {props.error ? <span className={formStyles.Error}>{props.error}</span> : null}
         <div>
