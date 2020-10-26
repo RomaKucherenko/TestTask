@@ -30,6 +30,7 @@ const LoginForm = (props) => {
         {props.error ? <span className={formStyles.Error}>{props.error}</span> : null}
         <div>
             <button disabled={props.isSubmitting} className={styles.LoginSubmitButton}>Войти в IT</button>
+            <button disabled={props.isSubmitting} className={styles.LoginSubmitButton}>Test Mode</button>
         </div>
     </form>
 }
