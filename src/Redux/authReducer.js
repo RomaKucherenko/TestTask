@@ -39,7 +39,7 @@ export const login = (username, password) => async dispatch => {
         dispatch(setAuthDataAction(response.data.token))
     }
 }
-export const setTestMode = (dispatch) => {
+export const setTestMode = () => dispatch => {
     dispatch(setTestModeAction())
 }
 
