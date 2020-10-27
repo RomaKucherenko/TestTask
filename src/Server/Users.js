@@ -166,4 +166,3 @@ export const updateUserAPI = userData => {
             userData: userData})
     })
 }
-window.Users = Users
