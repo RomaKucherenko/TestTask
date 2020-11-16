@@ -104,43 +104,7 @@ const updateUser = userData => {
         return u
     })
 }
-export const requestUsersAPI = (token) => {
-    return new Promise((resolve, reject) => {
-        if (token) {
-            let usersCopy = [...Users]
-            resolve({
-                data: usersCopy.sort(function func(a, b) {
-                    return 0.5 - Math.random()
-                }),
-                code: 200
-            })
-        } else {
-            reject({
-                code: 401,
-                error: "You are not authorized"
-            })
-        }
-    })
-}
-export const requestUserProfileAPI = (userId) => {
-    return new Promise((resolve, reject) => {
-        if (1) {
-            resolve({
-                userData: Users.map(u => {
-                    if (u.id == userId) {
-                        return u
-                    }
-                }).filter(element => element)[0],
-                code: 200
-            })
-        } else {
-            reject({
-                code: 401,
-                error: "You are not authorized"
-            })
-        }
-    })
-}
+
 export const createUserAPI = userData => {
     return new Promise((resolve, reject) => {
         let usernames = getUsernames()
@@ -157,12 +121,5 @@ export const createUserAPI = userData => {
                 data: getLastUser()
             })
         }
-    })
-}
-export const updateUserAPI = userData => {
-    return new Promise((resolve, reject) => {
-        updateUser(userData)
-        resolve({
-            userData: userData})
     })
 }

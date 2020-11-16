@@ -88,7 +88,9 @@ const CreateUserReduxForm = compose(
     }))(CreateUserForm)
 
 const CreateUser = (props) => {
+
     let [isSubmitting, setSubmitting] = useState(false)
+
     const handleSubmit = (formData) => {
         props.createNewUser(formData).then(
             canRedirect => {
@@ -98,6 +100,7 @@ const CreateUser = (props) => {
             }
         )
     }
+
     return <CreateUserReduxForm onSubmit={handleSubmit}
                                 setSubmitting={setSubmitting}
                                 isSubmitting={isSubmitting}/>

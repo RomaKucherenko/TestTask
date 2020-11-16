@@ -5,8 +5,9 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import EditProfile from "./ProfileForm";
 
-const Profile = props => {
+const Profile = ({requestUserProfile, match, userProfile, updateUser, token}) => {
     let [isEditing, setEditing] = useState(false)
+
     const onEditProfileCancelClick = () => {
         setEditing(false)
     }
@@ -16,39 +17,45 @@ const Profile = props => {
     }
 
     useEffect(() => {
-        props.requestUserProfile(props.match.params.userId)
-    }, [])
+        requestUserProfile(match.params.userId, token)
+    }, [match.params.userId])
 
-    if (!props.userProfile) {
+    if (!userProfile) {
         return <div>...Loading...</div>
     }
 
     return <div>
         <div className="userForm">
+
             {isEditing ?
-                <EditProfile userProfile={props.userProfile}
-                             updateUser={props.updateUser}
+                <EditProfile userProfile={userProfile}
+                             updateUser={updateUser}
                              onCancelClick={onEditProfileCancelClick}
                              onSuccess={onEditProfileSuccess}
-                             userId={props.match.params.userId}/>
+                             token={token}
+                             userId={match.params.userId}/>
                 :
+
                 <div>
-                    <div>Username: {props.userProfile.username}</div>
-                    <div>Имя: {props.userProfile.first_name}</div>
-                    <div>Фамилия: {props.userProfile.last_name}</div>
+                    <div>Username: {userProfile.username}</div>
+                    <div>Имя: {userProfile.first_name}</div>
+                    <div>Фамилия: {userProfile.last_name}</div>
                     <button onClick={() => setEditing(true)}>Edit</button>
                 </div>
             }
         </div>
+
         <NavLink to="/Users">
             <button>Back to Users</button>
         </NavLink>
+
     </div>
 }
 
 let mapStateToProps = state => {
     return {
-        userProfile: state.profile.userProfile
+        userProfile: state.profile.userProfile,
+        token: state.auth.token
     }
 }
 

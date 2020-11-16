@@ -3,7 +3,7 @@ import './App.module.css';
 import Login from "./components/Login/Login";
 import Users from "./components/Users/Users";
 import {connect} from "react-redux";
-import {withRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import {compose} from "redux";
 import Profile from "./components/Profile/Profile";
 import CreateUser from "./components/Users/CreateUser/CreateUser";
@@ -21,7 +21,7 @@ const App = (props) => {
                     <Route path="/Users/create" render={() => <CreateUser/>}/>
                 </div>
                 :
-                <Login history={props.history}/>
+                <Login/>
             }
         </div>
     )
@@ -33,8 +33,8 @@ const mapStateToProps = state => {
         token: state.auth.token
     }
 }
+
 const appCompose = compose(
-    withRouter,
     connect(mapStateToProps, null)
 )(App)
 export default appCompose;

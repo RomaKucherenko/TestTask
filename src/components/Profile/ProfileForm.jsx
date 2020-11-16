@@ -8,6 +8,7 @@ import {
 } from "../../validators/userValidator";
 import formStyles from "../../common/FormControls/FormControls.module.css"
 import * as underscore from "underscore";
+import {checkWhatObjectFieldWasChanged} from "../../utils/checkWhatObjectFieldWasChanged";
 
 let max150 = maxLengthCreator(150)
 let max30 = maxLengthCreator(30)
@@ -68,20 +69,25 @@ const EditProfileReduxForm = compose(
 const EditProfile = (props) => {
 
     let [isSubmitting, setSubmitting] = useState(false)
+
     const handleSubmit = (formData) => {
+
         setSubmitting(true)
         let {username, first_name, last_name} = props.userProfile
+
         if (underscore.isEqual({username, first_name, last_name}, formData)) {
             setSubmitting(false)
             props.onSuccess()
         } else {
-            props.updateUser({...formData, id: props.userId}).then(() => {
+            //Объект в котором только изменившиеся свойства
+            const objectWithChangedFields = checkWhatObjectFieldWasChanged(formData,{username, first_name, last_name})
+            props.updateUser(objectWithChangedFields, props.userId, props.token).then(() => {
                     setSubmitting(false)
                     props.onSuccess()
-                }
-            )
+            })
         }
     }
+
     return <EditProfileReduxForm onSubmit={handleSubmit}
                                  isSubmitting={isSubmitting}
                                  onCancelClick={props.onCancelClick}/>

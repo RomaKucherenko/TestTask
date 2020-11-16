@@ -1,5 +1,4 @@
-import {requestUsersAPI} from "../Server/Users";
-import {createNewUserServer} from "../dalApi/dalApi";
+import {createNewUserServer, requestUsersAPI} from "../dalApi/dalApi";
 import {stopSubmit} from "redux-form";
 
 const SET_USERS = `SET_USERS`
@@ -31,17 +30,18 @@ const usersReducer = (state = initialState, action) => {
 export const setUsersAction = (users) => ({type: SET_USERS, users: users})
 export const addNewUserAction = (userData) => ({type: ADD_NEW_USER, userData})
 
-export const requestUsers = (token = "781bd9f1de084f4daa7ba2aa8a71a2eab855354e") => {
-    //token должен зашиваться в cookie
+
+export const requestUsers = (token) => {
     return async dispatch => {
         let response = await requestUsersAPI(token)
-        if (response.code === 200) {
+
+        if (response.status === 200) {
             dispatch(setUsersAction(response.data))
-        } else if (response.code === 401) {
-            console.log(response.error)
         }
     }
 }
+
+
 export const createNewUser = userData => async dispatch => {
     try {
         let response = await createNewUserServer(userData)

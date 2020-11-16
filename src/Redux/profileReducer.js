@@ -1,5 +1,5 @@
-import {requestUserProfileAPI} from "../Server/Users";
-import {updateUserServer} from "../dalApi/dalApi";
+import {requestUserProfileAPI, updateUserAPI} from "../dalApi/dalApi";
+
 
 const SET_USER_PROFILE = `SET_USER_PROFILE`;
 const UPDATE_USER = "UPDATE_USER"
@@ -27,13 +27,11 @@ const profileReducer = (state = initialState, action) => {
 }
 export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userProfile})
 
-export const requestUserProfile = (userId) => {
+export const requestUserProfile = (userId, token) => {
     return async dispatch => {
-        let response = await requestUserProfileAPI(userId)
-        if(response.code === 200){
-            dispatch(setUserProfile(response.userData))
-        }
-        else if(response.code === 401){
+        let response = await requestUserProfileAPI(userId, token)
+        if(response.status === 200){
+            dispatch(setUserProfile(response.data))
         }
     }
 }
@@ -41,9 +39,12 @@ export const requestUserProfile = (userId) => {
 
 
 export const updateUserAction = (userData) => ({type: UPDATE_USER, userData})
-export const updateUser = userData => async dispatch => {
-    let response = await updateUserServer(userData)
-    dispatch(updateUserAction(response.userData))
+
+export const updateUser = (userData, userId, token)  => {
+    return async dispatch => {
+        let response = await updateUserAPI(userData, userId, token)
+        dispatch(setUserProfile(response.data))
+    }
 }
 
 export default profileReducer
