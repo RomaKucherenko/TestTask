@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from "react";
 import {NavLink, withRouter} from "react-router-dom";
-import {requestUserProfile, updateUser} from "../../Redux/profileReducer";
+import {nullUserAction, requestUserProfile, updateUser} from "../../Redux/profileReducer";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import EditProfile from "./ProfileForm";
+import styles from "./Profile.module.css"
 
-const Profile = ({requestUserProfile, match, userProfile, updateUser, token}) => {
+const Profile = ({requestUserProfile, match, userProfile, updateUser, token, nullUserAction}) => {
     let [isEditing, setEditing] = useState(false)
-
+    const killUserData = () => {
+        nullUserAction()
+    }
     const onEditProfileCancelClick = () => {
         setEditing(false)
     }
@@ -18,15 +21,15 @@ const Profile = ({requestUserProfile, match, userProfile, updateUser, token}) =>
 
     useEffect(() => {
         requestUserProfile(match.params.userId, token)
+        return killUserData()
     }, [match.params.userId])
 
     if (!userProfile) {
         return <div>...Loading...</div>
     }
 
-    return <div>
-        <div className="userForm">
-
+    return <div className={styles.Profile}>
+        <div>
             {isEditing ?
                 <EditProfile userProfile={userProfile}
                              updateUser={updateUser}
@@ -35,18 +38,20 @@ const Profile = ({requestUserProfile, match, userProfile, updateUser, token}) =>
                              token={token}
                              userId={match.params.userId}/>
                 :
-
-                <div>
+                <div className={styles.ProfileInfo}>
                     <div>Username: {userProfile.username}</div>
                     <div>Имя: {userProfile.first_name}</div>
                     <div>Фамилия: {userProfile.last_name}</div>
-                    <button onClick={() => setEditing(true)}>Edit</button>
+                    <div>is_active: {`${userProfile.is_active}`}</div>
+                    <div>is_superuser: {`${userProfile.is_superuser}`}</div>
+                    <div>last_login: {userProfile.last_login}</div>
+                    <button className={styles.EditButton} onClick={() => setEditing(true)}>Edit</button>
                 </div>
             }
         </div>
 
         <NavLink to="/Users">
-            <button>Back to Users</button>
+            <button className={styles.ToUsersButton}>Back to Users</button>
         </NavLink>
 
     </div>
@@ -61,6 +66,6 @@ let mapStateToProps = state => {
 
 const profileCompose = compose(
     withRouter,
-    connect(mapStateToProps, {requestUserProfile, updateUser})
+    connect(mapStateToProps, {requestUserProfile, updateUser, nullUserAction})
 )(Profile)
 export default profileCompose

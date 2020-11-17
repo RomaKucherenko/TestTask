@@ -1,20 +1,24 @@
 .App {
-    width: 960px;
+    width: 1080px;
     margin: 0 auto;
     background-color: #E0E0E0;
     padding: 15px;
     box-sizing: border-box;
 }
 
-@media(max-width: 959px) {
+@media(max-width: 1082px) {
     .App {
         width: 768px
     }
 }
 
-@media(max-width: 767px) {
+@media(max-width: 789px) {
     .App {
-        width: 100%;
-        min-width: 320px;
+        width: 540px;
+    }
+}
+@media(max-width: 542px) {
+    .App {
+        width: 320px;
     }
 }

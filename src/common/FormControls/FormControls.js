@@ -6,7 +6,7 @@ export const Input = ({input, meta, ...props}) => {
     let hasError = meta.error && meta.touched
     return (
         <>
-            <div className={styles.Input}>
+            <div className={props.className ? styles[props.className] : styles.Input}>
                 <input {...input} {...props} className={hasError ? styles.Error : ""}/>
             </div>
             {hasError && <div>
@@ -24,7 +24,7 @@ export const passwordInput = ({input, meta, ...props}) => {
     }
     return (
         <>
-            <div className={styles.Input}>
+            <div className={props.className ? styles[props.className] : styles.Input}>
                 <input {...input} {...props} className={hasError ? styles.Error : ""}/>
                 <span onClick={setType} className={styles.ShowLabel}>
                     Show

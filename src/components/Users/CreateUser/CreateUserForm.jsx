@@ -3,14 +3,7 @@ import {Field, reduxForm} from "redux-form";
 import formStyles from "../../../common/FormControls/FormControls.module.css"
 import styles from "./CreateUser.module.css"
 import {Input, passwordInput} from "../../../common/FormControls/FormControls";
-import {
-    correctFirstname,
-    correctLastname,
-    correctPassword,
-    correctUsername,
-    maxLengthCreator,
-    requiredField
-} from "../../../validators/createUserValidator";
+import {correctFirstname,correctLastname,correctPassword,correctUsername,maxLengthCreator,requiredField} from "../../../validators/createUserValidator";
 import {compose} from "redux";
 import validate from "../../../validators/validate";
 import {withRouter} from "react-router-dom";
@@ -22,7 +15,7 @@ const CreateUserForm = (props) => {
     let [typeConfirmPassword, setTypeConfirmPassword] = useState("password")
     let [typePassword, setTypePassword] = useState("password")
 
-    return <form onSubmit={props.handleSubmit}>
+    return <form  className={styles.CreateUserForm} onSubmit={props.handleSubmit}>
         <div>
             <div>
                 <label htmlFor="username">Username:</label>
@@ -31,6 +24,7 @@ const CreateUserForm = (props) => {
                        name="username"
                        id="username"
                        placeholder="Username"
+                       className={"StyledInput"}
                 />
             </div>
             <div>
@@ -40,6 +34,7 @@ const CreateUserForm = (props) => {
                        name="first_name"
                        id="first_name"
                        placeholder="Имя"
+                       className={"StyledInput"}
                 />
             </div>
             <div>
@@ -49,6 +44,7 @@ const CreateUserForm = (props) => {
                        name="last_name"
                        id="last_name"
                        placeholder="Фамилия"
+                       className={"StyledInput"}
                 />
             </div>
             <div>
@@ -60,6 +56,7 @@ const CreateUserForm = (props) => {
                        id="password"
                        type={typePassword}
                        setType={setTypePassword}
+                       className={"StyledPasswordInput"}
                 />
             </div>
             <div>
@@ -71,12 +68,15 @@ const CreateUserForm = (props) => {
                        placeholder="Повторите пароль"
                        type={typeConfirmPassword}
                        setType={setTypeConfirmPassword}
+                       className={"StyledPasswordInput"}
                 />
             </div>
         </div>
         {props.error ? <span className={formStyles.Error}>{props.error}</span> : null}
         <div>
-            <button disabled={props.isSubmitting}>CreateUser</button>
+            <button
+                className={styles.CreateUserButton}
+                disabled={props.isSubmitting}>CreateUser</button>
         </div>
     </form>
 }

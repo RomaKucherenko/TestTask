@@ -1,8 +1,77 @@
-.User{
-    border: 1px solid black
+.Users {
+    margin-top: 10px;
 }
-.User img{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+.Header{
+    margin-bottom: 10px;
+}
+.Header .User{
+    border: 0 !important;
+    font-size: 16px;
+}
+.User{
+    display: grid;
+    grid-template-columns: 40px 170px 270px 425px 90px 60px;
+
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+
+    font-size: 15px;
+ }
+.User a{
+    text-decoration:none;
+    color:navy;
+}
+.User:last-child{
+    border-bottom: 1px solid black;
+}
+.User>div{
+    padding-left: 5px;
+    border-left: 1px solid black;
+    display: inline-block;
+
+    word-wrap: break-word;
+}
+.User>div:first-child{
+    border: 0;
+}
+.User button{
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+}
+.UsersFilterInput{
+    border: 0;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.DeleteButton{
+    color:red !important;
+}
+@media (max-width: 1082px) {
+    .User{
+        grid-template-columns: 40px 100px 180px 275px 90px 60px;
+    }
+}
+@media (max-width: 789px) {
+    .Header .User{
+        font-size: 13px;
+    }
+    .User{
+        font-size: 12px;
+        grid-template-columns: 30px 100px 125px 130px 75px 45px;
+    }
+}
+@media (max-width: 542px) {
+    .Header .User{
+        font-size: 11px;
+    }
+    .User{
+        font-size: 10px;
+        grid-template-columns: 30px 50px 50px 55px 65px 40px;
+    }
 }

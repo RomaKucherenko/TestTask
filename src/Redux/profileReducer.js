@@ -4,6 +4,7 @@ import {stopSubmit} from "redux-form";
 
 const SET_USER_PROFILE = `SET_USER_PROFILE`;
 const UPDATE_USER = "UPDATE_USER"
+const NULL_PROFILE = "NULL_PROFILE"
 
 let initialState = {
     userProfile: null
@@ -22,11 +23,17 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 userProfile: {...action.userData}
             }
+        case NULL_PROFILE:
+            return {
+                userProfile: null
+            }
         default:
             return state
     }
 }
 export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userProfile})
+export const updateUserAction = (userData) => ({type: UPDATE_USER, userData})
+export const nullUserAction = () => ({type: NULL_PROFILE})
 
 export const requestUserProfile = (userId, token) => {
     return async dispatch => {
@@ -39,7 +46,8 @@ export const requestUserProfile = (userId, token) => {
 
 
 
-export const updateUserAction = (userData) => ({type: UPDATE_USER, userData})
+
+
 
 export const updateUser = (userData, userId, token)  => {
     return async dispatch => {

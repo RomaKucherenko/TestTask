@@ -3,6 +3,7 @@ import {stopSubmit} from "redux-form";
 
 const SET_USERS = `SET_USERS`
 const ADD_NEW_USER = "ADD_NEW_USER"
+const NULL_USERS_DATA = "NULL_USERS_DATA"
 
 let initialState = {
     users: [],
@@ -17,18 +18,23 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 users: [...action.users]
             }
-
         case ADD_NEW_USER:
             return {
                 ...state,
                 users: [...state.users, action.userData]
             }
+        case NULL_USERS_DATA: {
+            return {
+                users: []
+            }
+        }
         default:
             return state
     }
 }
 export const setUsersAction = (users) => ({type: SET_USERS, users: users})
 export const addNewUserAction = (userData) => ({type: ADD_NEW_USER, userData})
+export const nullUsersDataAction = () => ({type: NULL_USERS_DATA})
 
 
 export const requestUsers = (token) => {

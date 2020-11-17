@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import User from "./User";
 import {sortById} from "../../utils/sortById";
 import {NavLink} from "react-router-dom";
+import styles from "./Users.module.css"
 
 const useRequestUsers = (requestUsers, token) => {
     useEffect(() => {
@@ -14,6 +15,7 @@ const useRequestUsers = (requestUsers, token) => {
 const Users = ({requestUsers, users, token}) => {
     let [pageUsers, setPageUsers] = useState(users)
     let [filterValue, setFilterValue] = useState("")
+    let [isSortByUp, setIsSortByUp] = useState(false)
 
     useRequestUsers(requestUsers, token)//Hook RequestUsers
 
@@ -31,7 +33,8 @@ const Users = ({requestUsers, users, token}) => {
     }
 
     const onSortByIdClick = () => {
-        setPageUsers(sortById(pageUsers))
+        setPageUsers(sortById(pageUsers, isSortByUp))
+        setIsSortByUp(!isSortByUp)
     }
 
     let usersElements = pageUsers.map(u => {
@@ -39,6 +42,7 @@ const Users = ({requestUsers, users, token}) => {
                      username={u.username}
                      first_name={u.first_name}
                      last_name={u.last_name}
+
                />
     })
 
@@ -50,6 +54,7 @@ const Users = ({requestUsers, users, token}) => {
                 <input value={filterValue}
                        onChange={onFilterValueChange}
                        placeholder="Начните вводить Username"
+                       className={styles.UsersFilterInput}
                 />
 
                 <button onClick={onSortByIdClick}>
@@ -62,7 +67,17 @@ const Users = ({requestUsers, users, token}) => {
 
             </div>
 
-            <div className="Users">
+            <div className={styles.Users}>
+                <div className={styles.Header}>
+                    <div className={styles.User}>
+                        <div>id</div>
+                        <div>username</div>
+                        <div>first_name</div>
+                        <div>last_name</div>
+                        <div>ViewProfile</div>
+                        <div>Delete</div>
+                    </div>
+                </div>
                 {usersElements}
             </div>
         </>

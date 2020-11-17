@@ -1,15 +1,48 @@
-/*.Item {*/
-/*    display: flex;*/
-/*}*/
-/*.Item div:first-child {*/
-/*    border: 1px solid red*/
-/*}*/
-/*.Item div:nth-child(2) {*/
-/*    vertical-align: bottom;*/
-/*}*/
-/*.Item label{*/
-/*    display: block;*/
-/*}*/
-/*.Item input{*/
-/*    display: inline-block;*/
-/*}*/
+.CreateUser{
+    text-align: center;
+}
+.CreateUserForm>div{
+    margin-bottom: 10px;
+
+}
+
+.ToUsersButton {
+
+    width: 30%;
+    outline: none;
+    cursor: pointer;
+    height: 30px;
+    font-size: 14px;
+    background: grey;
+    color: white;
+    border: 0;
+    transition-duration: 200ms;
+
+    margin-top: 5px;
+    margin-bottom: 10px;
+
+}
+
+.ToUsersButton:hover {
+    background: darkslategrey;
+}
+
+.CreateUserButton {
+    width: 30%;
+    outline: none;
+    cursor: pointer;
+    height: 30px;
+    font-size: 14px;
+    background: green;
+    color: white;
+    border: 0;
+    transition-duration: 200ms;
+
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.CreateUserButton:hover {
+
+    background: limegreen;
+}

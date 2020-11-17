@@ -20,6 +20,7 @@ const LoginForm = (props) => {
                    validate={[requiredField, correctUsername, max150]}
                    name={"username"}
                    placeholder={"Login"}
+                   className={"StyledInput"}
             />
 
         </div>
@@ -30,7 +31,8 @@ const LoginForm = (props) => {
                    name={"password"} placeholder={"Password"}
                    validate={[requiredField, correctPassword, max128]}
                    type={typePassword}
-                   setType={setTypePassword}/>
+                   setType={setTypePassword}
+                   className={"StyledPasswordInput"}/>
 
         </div>
 

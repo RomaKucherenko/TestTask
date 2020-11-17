@@ -1,3 +1,6 @@
+.Profile{
+    text-align: center;
+}
 .ProfileSubmitButton {
     width: 80%;
     outline: none;
@@ -8,7 +11,78 @@
     color: white;
     border: 0;
     transition-duration: 200ms;
+
+    margin-top: 10px;
 }
 .ProfileSubmitButton:hover {
     background: royalblue;
 }
+.ProfileCancelButton{
+    width: 80%;
+    outline: none;
+    cursor: pointer;
+    height: 40px;
+    font-size: 16px;
+    background: orangered;
+    color: white;
+    border: 0;
+    transition-duration: 200ms;
+
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.ProfileCancelButton:hover {
+    background: red;
+}
+.ProfileInfo{
+}
+.ProfileInfo>div{
+    font-size: 20px;
+    border-bottom: 4px solid navy;
+    margin-bottom: 10px;
+}
+.ToUsersButton{
+
+    width: 30%;
+    outline: none;
+    cursor: pointer;
+    height: 30px;
+    font-size: 14px;
+    background: grey;
+    color: white;
+    border: 0;
+    transition-duration: 200ms;
+
+    margin-top: 5px;
+    margin-bottom: 10px;
+
+}
+.ToUsersButton:hover {
+    background: darkslategrey;
+}
+.EditButton{
+
+    width: 30%;
+    outline: none;
+    cursor: pointer;
+    height: 30px;
+    font-size: 14px;
+    background: grey;
+    color: white;
+    border: 0;
+    transition-duration: 200ms;
+
+    margin-top: 5px;
+
+}
+.EditButton:hover {
+    background: darkslategrey;
+}
+.EditProfileForm{
+    font-size: 20px;
+}
+.EditProfileForm input{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+

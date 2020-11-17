@@ -2,10 +2,11 @@ import { loginAPI } from "../dalApi/dalApi";
 import { stopSubmit } from "redux-form";
 
 const SET_AUTH_DATA = "SET_AUTH_DATA"
+const NULL_AUTH_DATA = "NULL_AUTH_DATA"
 
 let initialState = {
-    isAuth: false,
-    token: null
+    isAuth: true,
+    token: "781bd9f1de084f4daa7ba2aa8a71a2eab855354e"
 }
 
 const authReducer = (state = initialState, action) => {
@@ -16,12 +17,19 @@ const authReducer = (state = initialState, action) => {
                 token: action.token,
                 isAuth: true
             }
+        case NULL_AUTH_DATA:
+            return {
+                token: null,
+                isAuth: false
+            }
         default:
             return state
     }
 }
 
 export const setAuthDataAction = (token) => ({type: SET_AUTH_DATA, token})
+export const nullAuthDataAction = () => ({type: NULL_AUTH_DATA})
+
 
 export const login = (username, password) => async dispatch => {
     let response = await loginAPI(username, password)

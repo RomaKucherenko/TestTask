@@ -2,21 +2,21 @@ import React from "react";
 import styles from './Users.module.css'
 import {NavLink} from "react-router-dom";
 
-const User = (props) => {
+const User = ({username, first_name, last_name, is_active, is_superuser, last_login, id}) => {
     return <div className={styles.User}>
 
-        <NavLink to={"/Profile/" + props.id}>
-            <img src="https://static2.clutch.co/s3fs-public/logos/de2c8bde806ea56b7e405a9a86a501be.png?m.QYppUsaGYggvTPcXhRKy0uiVPMYv4Z"/>
-        </NavLink>
+        <div>{id}</div>
+        <div>{username}</div>
+        <div>{first_name}</div>
+        <div>{last_name}</div>
 
         <div>
-            <span>
-                {props.username}, {props.id}
-            </span>
+            <NavLink to={"/Profile/" + id}>
+                ViewProfile
+            </NavLink>
         </div>
-
         <div>
-            {props.first_name} {props.last_name}
+            <button className={styles.DeleteButton}>Delete</button>
         </div>
 
     </div>

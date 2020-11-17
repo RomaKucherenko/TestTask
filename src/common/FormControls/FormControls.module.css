@@ -8,10 +8,14 @@
     margin-top: 5px;
     font-size: 12px;
 }
-.Input {
+.Input,
+.LoginInput{
     width: 100%;
 }
-.Input input {
+.Input input,
+.StyledPasswordInput input,
+.StyledInput input
+{
     border: 0;
     width: 80%;
     outline:none;
@@ -28,4 +32,13 @@
 
 .ShowLabel {
     cursor: pointer;
+}
+.StyledPasswordInput{
+    margin: 0 auto;
+    width: 80%;
+    background-color: rgb(232, 240, 254);
+}
+.StyledInput input,
+.StyledPasswordInput input{
+    background-color: rgb(232, 240, 254);
 }
