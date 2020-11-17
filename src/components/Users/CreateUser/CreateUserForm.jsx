@@ -92,11 +92,11 @@ const CreateUser = (props) => {
     let [isSubmitting, setSubmitting] = useState(false)
 
     const handleSubmit = (formData) => {
-        props.createNewUser(formData).then(
-            canRedirect => {
-                if(canRedirect){
-                    props.history.push("/Users")
-                }
+        let {username, last_name, first_name, password} = formData
+        props.createNewUser({username, last_name, first_name, password, is_active: true}).then(
+            response => {
+                setSubmitting(false)
+                if (response === undefined) props.history.push("/Users")
             }
         )
     }

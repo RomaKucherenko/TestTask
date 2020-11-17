@@ -14,6 +14,7 @@ let max150 = maxLengthCreator(150)
 let max30 = maxLengthCreator(30)
 
 const EditProfileForm = (props) => {
+
     const onCancelClick = (e) => {
         e.preventDefault()
         props.onCancelClick()
@@ -80,11 +81,17 @@ const EditProfile = (props) => {
             props.onSuccess()
         } else {
             //Объект в котором только изменившиеся свойства
-            const objectWithChangedFields = checkWhatObjectFieldWasChanged(formData,{username, first_name, last_name})
-            props.updateUser(objectWithChangedFields, props.userId, props.token).then(() => {
+            const objectWithChangedFields = checkWhatObjectFieldWasChanged(
+                formData,
+                {username, first_name, last_name}
+                )
+
+            props.updateUser(objectWithChangedFields, props.userId, props.token).then(
+                //Если response не пустой - есть ошибка. Пустой- всё хорошо. Вызываем onSuccess
+                response => {
                     setSubmitting(false)
-                    props.onSuccess()
-            })
+                    if (response === undefined) props.onSuccess()
+                })
         }
     }
 

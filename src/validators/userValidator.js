@@ -15,9 +15,9 @@ export const correctUsername = username => {
 }
 export const correctFirstname = firstname => {
     if (/^[a-zA-Z]+$/.test(firstname)) return undefined
-    return "Только буквы."
+    return "Только буквы латинского алфавита."
 }
 export const correctLastname = lastname => {
     if (/^[a-zA-Z]+$/.test(lastname)) return undefined
-    return "Только буквы."
+    return "Только буквы латинского алфавита."
 }

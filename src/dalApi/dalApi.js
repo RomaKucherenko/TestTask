@@ -1,5 +1,4 @@
 import * as axios from "axios"
-import {createUserAPI} from "../Server/Users";
 
 const instance = axios.create({
     baseURL: "https://emphasoft-test-assignment.herokuapp.com/"
@@ -41,8 +40,24 @@ export const requestUserProfileAPI = (userId, token) => {
         }
     )
 }
-export const createNewUserServer = async userData => {
-    return await createUserAPI(userData)
+
+export const createNewUserAPI = (userData, token = "781bd9f1de084f4daa7ba2aa8a71a2eab855354e") => {
+    console.log(userData)
+    return instance.post(
+        "/api/v1/users/",
+        userData,
+        {
+            headers: {
+                authorization: `Token ${token}`
+            }
+        }).then(
+        response => {
+            return response
+        },
+        error => {
+            return error.response
+        }
+    )
 }
 
 export const updateUserAPI = (userData, userId, token) => {
@@ -57,20 +72,6 @@ export const updateUserAPI = (userData, userId, token) => {
         }
     ).then(
         response => response,
-        error => {
-            return error
-        }
+        error => error.response
     )
-
-    // return fetch(`http://emphasoft-test-assignment.herokuapp.com/api/v1/users/${userId}/`, {
-    //     method: `PATCH`,
-    //     headers: {
-    //         Accept: "application/json",
-    //         "Content-Type": "application/json",
-    //         authorization: `Token ${token}`,
-    //
-    //     },
-    //     body: JSON.stringify(userData)
-    // })
-
 }

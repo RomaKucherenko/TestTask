@@ -1,4 +1,4 @@
-import {createNewUserServer, requestUsersAPI} from "../dalApi/dalApi";
+import {createNewUserAPI, requestUsersAPI} from "../dalApi/dalApi";
 import {stopSubmit} from "redux-form";
 
 const SET_USERS = `SET_USERS`
@@ -43,18 +43,16 @@ export const requestUsers = (token) => {
 
 
 export const createNewUser = userData => async dispatch => {
-    try {
-        let response = await createNewUserServer(userData)
-        if (response.code === 200) {
-            dispatch(addNewUserAction(response.data))
-            return true
-        }
-    } catch (error) {
-        if (error.code === 400) {
-            dispatch(stopSubmit("createUser", {_error: error.error}))
-            return false
-        }
+    let response = await createNewUserAPI(userData)
+    if (response.code === 201) {
+        dispatch(addNewUserAction(response.data))
+
+    } else if (response.status === 400) {
+        let error = Object.values(response.data)[0][0]
+        dispatch(stopSubmit("createUser", {_error: error}))
+        return error
     }
+
 }
 
 export default usersReducer
