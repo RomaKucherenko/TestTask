@@ -37,6 +37,7 @@ const Login = ({login, history}) => {
         </div>
     )
 }
+
 const loginCompose = compose(
     withRouter,
     connect(null, {login})

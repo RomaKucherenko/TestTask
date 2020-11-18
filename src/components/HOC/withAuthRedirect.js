@@ -9,6 +9,7 @@ let mapStateToProps = (state) => {
 }
 
 const WithAuthRedirect = (Component) => {
+
     const AuthContainer = (props) => {
         if (!props.token) props.history.push('/Login')
         return <Component {...props}/>

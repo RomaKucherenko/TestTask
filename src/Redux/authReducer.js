@@ -5,7 +5,8 @@ const SET_AUTH_DATA = "SET_AUTH_DATA"
 const NULL_AUTH_DATA = "NULL_AUTH_DATA"
 
 let initialState = {
-    token: null
+    token: null,
+    isAuth: false
 }
 
 const authReducer = (state = initialState, action) => {
@@ -14,6 +15,7 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 token: action.token,
+                isAuth: true
             }
         case NULL_AUTH_DATA:
             localStorage.removeItem('token')
@@ -37,6 +39,7 @@ export const login = (username, password) => async dispatch => {
     }
     else if (response.status === 200){
         return dispatch(setAuthDataAction(response.data.token))
+
     }
 }
 
