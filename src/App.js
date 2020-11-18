@@ -9,19 +9,35 @@ import {initializeApp} from "./Redux/authReducer";
 import {connect} from "react-redux";
 import Login from "./components/Login/Login";
 
-
-const App = (props) => {
-    let [isInitializing, setIsInitializing] = React.useState(true)
+const useInitializeApp = (initializeApp, setIsInitializing) => {
     useEffect(() => {
-        props.initializeApp().then(
+
+        initializeApp().then(
             () => setIsInitializing(false)
+
         )
     }, [])
+}
 
+const useCheckLastPathname = (isAuth, history, lastPath) => {
     useEffect(() => {
-        if(!props.isAuth) props.history.push("/Login")
-        else props.history.push("/Users")
-    },[props.isAuth])
+        if ( isAuth ){
+            if( !!localStorage.getItem('lastPath') ) {
+                history.push(localStorage.getItem('lastPath'))
+            }
+            else history.push("/Users")
+        }
+        else history.push("/Login")
+    },[isAuth])
+}
+
+const App = ({initializeApp, isAuth, history, lastPath}) => {
+    let [isInitializing, setIsInitializing] = React.useState(true)
+
+    useInitializeApp(initializeApp, setIsInitializing)
+
+    useCheckLastPathname(isAuth, history, lastPath)
+
 
     return (
         <div className={styles.App}>
@@ -44,7 +60,8 @@ const App = (props) => {
 const mapStateToProps = state => {
     return {
         token: state.auth.token,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        lastPath: state.auth.lastPath
     }
 }
 

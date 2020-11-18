@@ -9,6 +9,7 @@ import classNames from "classnames"
 import {compose} from "redux";
 import withAuthRedirect from "../HOC/withAuthRedirect";
 import Logout from "../Logout/Logout";
+import WithSetPathNameInLocalStorage from "../HOC/withSetPathNameInLocalStorage";
 
 const useRequestUsers = (requestUsers, token) => {
     useEffect(() => {
@@ -16,8 +17,14 @@ const useRequestUsers = (requestUsers, token) => {
     }, [])
 }
 
+const useResetSortListener = (users, filterValue, setIsSortByUp) => {
+    useEffect(() => {
+        setIsSortByUp(null)
+    }, [users, filterValue])
+}
 
-const Users = ({requestUsers, users, token}) => {
+
+const Users = ({requestUsers, users, token, ...props}) => {
     let [pageUsers, setPageUsers] = useState(users)
     let [filterValue, setFilterValue] = useState("")
     let [isSortByUp, setIsSortByUp] = useState(null)
@@ -25,14 +32,10 @@ const Users = ({requestUsers, users, token}) => {
     useRequestUsers(requestUsers, token)//Hook RequestUsers
 
     //Слушаем reset сортировки
-    useEffect(() => {
-        setIsSortByUp(null)
-    }, [users, filterValue])
-
+    useResetSortListener(users, filterValue, setIsSortByUp)
 
     useEffect(() => {
         setPageUsers(users)
-
     }, [users])
 
     const filterUsers = (users, value) => {
@@ -109,6 +112,7 @@ const mapStateToProps = (state) => {
 }
 
 const UsersCompose = compose(
+    WithSetPathNameInLocalStorage,
     withAuthRedirect
 )(Users)
 

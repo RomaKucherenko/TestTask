@@ -7,6 +7,9 @@ import EditProfile from "./ProfileForm";
 import styles from "./Profile.module.css"
 import withAuthRedirect from "../HOC/withAuthRedirect";
 import Logout from "../Logout/Logout";
+import WithSetPathNameInLocalStorage from "../HOC/withSetPathNameInLocalStorage";
+
+
 
 const Profile = ({requestUserProfile, match, userProfile, updateUser, token, nullUserAction}) => {
     let [isEditing, setEditing] = useState(false)
@@ -71,6 +74,7 @@ let mapStateToProps = state => {
 }
 
 const profileCompose = compose(
+    WithSetPathNameInLocalStorage,
     withAuthRedirect,
     withRouter,
     connect(mapStateToProps, {requestUserProfile, updateUser, nullUserAction})

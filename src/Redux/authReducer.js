@@ -19,6 +19,7 @@ const authReducer = (state = initialState, action) => {
             }
         case NULL_AUTH_DATA:
             localStorage.removeItem('token')
+            localStorage.removeItem('lastPath')
             return {
                 token: null,
             }
