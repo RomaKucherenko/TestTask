@@ -14,7 +14,7 @@ const CreateUser = props => {
 
         <Logout/>
 
-        <CreateUserForm createNewUser={props.createNewUser}/>
+        <CreateUserForm createNewUser={props.createNewUser} token={props.token}/>
 
         <NavLink to="/Users">
             <button className={styles.ToUsersButton}>Back to Users</button>
@@ -27,4 +27,10 @@ const CreateUserCompose = compose(
     withAuthRedirect
 )(CreateUser)
 
-export default connect(null, {createNewUser})(CreateUserCompose)
+let mapStateToProps = state => {
+    return {
+        token: state.auth.token
+    }
+}
+
+export default connect(mapStateToProps, {createNewUser})(CreateUserCompose)

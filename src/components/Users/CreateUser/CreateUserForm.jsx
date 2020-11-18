@@ -102,7 +102,7 @@ const CreateUser = (props) => {
     const handleSubmit = (formData) => {
         let {username, last_name, first_name, password} = formData
 
-        props.createNewUser({username, last_name, first_name, password, is_active: true}).then(
+        props.createNewUser({username, last_name, first_name, password, is_active: true}, props.token).then(
             response => {
                 setSubmitting(false)
                 if (response === undefined) props.history.push("/Users")
