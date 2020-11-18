@@ -35,8 +35,10 @@
     background: red;
 }
 .ProfileInfo{
+    text-align: left;
 }
 .ProfileInfo>div{
+
     font-size: 20px;
     border-bottom: 4px solid navy;
     margin-bottom: 10px;
@@ -78,9 +80,11 @@
 .EditButton:hover {
     background: darkslategrey;
 }
+
 .EditProfileForm{
     font-size: 20px;
 }
+
 .EditProfileForm input{
     margin-top: 10px;
     margin-bottom: 5px;

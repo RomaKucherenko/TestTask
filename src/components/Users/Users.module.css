@@ -1,14 +1,17 @@
 .Users {
     margin-top: 10px;
 }
-.Header{
+
+.Header {
     margin-bottom: 10px;
 }
-.Header .User{
+
+.Header .User {
     border: 0 !important;
     font-size: 16px;
 }
-.User{
+
+.User {
     display: grid;
     grid-template-columns: 40px 170px 270px 425px 90px 60px;
 
@@ -17,25 +20,30 @@
     border-right: 1px solid black;
 
     font-size: 15px;
- }
-.User a{
-    text-decoration:none;
-    color:navy;
 }
-.User:last-child{
+
+.User a {
+    text-decoration: none;
+    color: navy;
+}
+
+.User:last-child {
     border-bottom: 1px solid black;
 }
-.User>div{
+
+.User > div {
     padding-left: 5px;
     border-left: 1px solid black;
     display: inline-block;
 
     word-wrap: break-word;
 }
-.User>div:first-child{
+
+.User > div:first-child {
     border: 0;
 }
-.User button{
+
+.User button {
     padding: 0;
     border: none;
     font: inherit;
@@ -43,35 +51,90 @@
     background-color: transparent;
     cursor: pointer;
 }
-.UsersFilterInput{
+
+.UsersFilterInput {
     border: 0;
     height: 20px;
     margin-right: 5px;
+    width: 200px;
 }
 
-.DeleteButton{
-    color:red !important;
+.UsersHeader {
+    display: flex;
 }
+
+.DeleteButton {
+    color: red !important;
+}
+
+.SortById {
+    padding-top: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.SortById:hover:after {
+    content: "▲";
+}
+
+.SortById.ByDown:after,
+.SortById.ByUp:hover:after {
+    content: "▼";
+}
+
+.SortById.ByUp:after,
+.SortById.ByDown:hover:after {
+    content: "▲";
+}
+
+.CreateNewUserLink {
+    padding-top: 5px;
+    text-decoration: none;
+    color: darkgreen;
+    cursor: pointer;
+
+    transition-duration: 200ms;
+}
+
+.CreateNewUserLink:hover {
+    color: forestgreen;
+}
+
+
 @media (max-width: 1082px) {
-    .User{
+    .User {
         grid-template-columns: 40px 100px 180px 275px 90px 60px;
     }
 }
+
 @media (max-width: 789px) {
-    .Header .User{
+    .Header .User {
         font-size: 13px;
     }
-    .User{
+
+    .User {
         font-size: 12px;
         grid-template-columns: 30px 100px 125px 130px 75px 45px;
     }
+    .UsersFilterInput{
+        font-size: 10px;
+        width: 170px;
+    }
 }
+
 @media (max-width: 542px) {
-    .Header .User{
+    .Header .User {
         font-size: 11px;
     }
-    .User{
+
+    .User {
         font-size: 10px;
         grid-template-columns: 30px 50px 50px 55px 65px 40px;
+    }
+    .UsersHeader{
+        font-size: 11px;
+    }
+    .UsersFilterInput{
+        width: 130px;
     }
 }

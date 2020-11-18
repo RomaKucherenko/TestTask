@@ -15,6 +15,6 @@ export const sortById = (users, isSortByUp) => {
         .map(group => group.sort(sortByNum))
         .sort(sortByMinNum);
 
-    if(isSortByUp) return [].concat(...groups).reverse()
-    return [].concat(...groups)
+    if(isSortByUp) return [].concat(...groups)
+    return [].concat(...groups).reverse()
 }

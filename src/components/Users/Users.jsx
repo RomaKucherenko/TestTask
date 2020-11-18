@@ -4,7 +4,9 @@ import {connect} from "react-redux";
 import User from "./User";
 import {sortById} from "../../utils/sortById";
 import {NavLink} from "react-router-dom";
+
 import styles from "./Users.module.css"
+import classNames from "classnames"
 
 const useRequestUsers = (requestUsers, token) => {
     useEffect(() => {
@@ -15,7 +17,7 @@ const useRequestUsers = (requestUsers, token) => {
 const Users = ({requestUsers, users, token}) => {
     let [pageUsers, setPageUsers] = useState(users)
     let [filterValue, setFilterValue] = useState("")
-    let [isSortByUp, setIsSortByUp] = useState(false)
+    let [isSortByUp, setIsSortByUp] = useState(null)
 
     useRequestUsers(requestUsers, token)//Hook RequestUsers
 
@@ -49,7 +51,7 @@ const Users = ({requestUsers, users, token}) => {
 
     return (
         <>
-            <div>
+            <div className={styles.UsersHeader}>
 
                 <input value={filterValue}
                        onChange={onFilterValueChange}
@@ -57,12 +59,17 @@ const Users = ({requestUsers, users, token}) => {
                        className={styles.UsersFilterInput}
                 />
 
-                <button onClick={onSortByIdClick}>
+                <div
+                    className={classNames(styles.SortById, {
+                        [styles.ByUp]: isSortByUp === true,
+                        [styles.ByDown]: isSortByUp === false
+                    })}
+                    onClick={onSortByIdClick}>
                     Sort By Id
-                </button>
+                </div>
 
-                <NavLink to="/Users/create">
-                    <button>Create new User</button>
+                <NavLink to="/Users/create" className={styles.CreateNewUserLink}>
+                    Create new User
                 </NavLink>
 
             </div>
@@ -70,7 +77,7 @@ const Users = ({requestUsers, users, token}) => {
             <div className={styles.Users}>
                 <div className={styles.Header}>
                     <div className={styles.User}>
-                        <div>id</div>
+                        <div>Id</div>
                         <div>username</div>
                         <div>first_name</div>
                         <div>last_name</div>
