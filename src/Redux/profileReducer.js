@@ -31,6 +31,7 @@ const profileReducer = (state = initialState, action) => {
             return state
     }
 }
+
 export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userProfile})
 export const updateUserAction = (userData) => ({type: UPDATE_USER, userData})
 export const nullUserAction = () => ({type: NULL_PROFILE})
@@ -43,11 +44,6 @@ export const requestUserProfile = (userId, token) => {
         }
     }
 }
-
-
-
-
-
 
 export const updateUser = (userData, userId, token)  => {
     return async dispatch => {

@@ -7,17 +7,21 @@ import LoginReduxForm from "./LoginForm";
 import {withRouter} from "react-router-dom";
 
 
-const Login = ({login, history, setTestMode}) => {
+const Login = ({login, history}) => {
+
     let [isSubmitting, setSubmitting] = useState(false)
 
     const onSubmit = (formData) => {
         setSubmitting(true)
-        let {username, password} = formData
+        let {username, password, remember_me} = formData
+
 
         login(username, password).finally(_ => {
                 setSubmitting(false)
             }
-        ).then(() => {
+        ).then((response) => {
+
+            if(remember_me) localStorage.setItem('token', response.token)
             history.push('/Users')
             }
         )

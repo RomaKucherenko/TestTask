@@ -1,8 +1,17 @@
 import React from "react";
 import styles from './Users.module.css'
 import {NavLink} from "react-router-dom";
+import {connect} from "react-redux";
+import {deleteUser} from "../../Redux/usersReducer";
 
-const User = ({username, first_name, last_name, is_active, is_superuser, last_login, id}) => {
+const User = ({username, first_name, last_name, id, token, deleteUser}) => {
+
+    const onDeleteUserClick = () => {
+        const conf = window.confirm(`Уверены что хотите удалить пользователя?`);
+
+        if(conf) deleteUser(id, token)
+    }
+
     return <div className={styles.User}>
 
         <div>{id}</div>
@@ -16,10 +25,20 @@ const User = ({username, first_name, last_name, is_active, is_superuser, last_lo
             </NavLink>
         </div>
         <div>
-            <button className={styles.DeleteButton}>Delete</button>
+            <span
+                onClick={onDeleteUserClick}
+                className={styles.DeleteActionSpan}>
+                Delete
+            </span>
         </div>
 
     </div>
 }
 
-export default User
+const mapStateToProps = state => {
+    return {
+        token: state.auth.token
+    }
+}
+
+export default connect(mapStateToProps, {deleteUser})(User)

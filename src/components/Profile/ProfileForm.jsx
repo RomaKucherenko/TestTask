@@ -2,14 +2,8 @@ import React, {useState} from "react";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {Field, reduxForm} from "redux-form";
-import {checkboxInput, Input} from "../../common/FormControls/FormControls";
-import {
-    correctFirstname,
-    correctLastname,
-    correctUsername,
-    maxLengthCreator,
-    requiredField
-} from "../../validators/userValidator";
+import {Input} from "../../common/FormControls/FormControls";
+import { correctFirstname,correctLastname,correctUsername, maxLengthCreator,requiredField} from "../../validators/userValidator";
 import formStyles from "../../common/FormControls/FormControls.module.css"
 import * as underscore from "underscore";
 import {checkWhatObjectFieldWasChanged} from "../../utils/checkWhatObjectFieldWasChanged";
@@ -19,10 +13,12 @@ let max150 = maxLengthCreator(150)
 let max30 = maxLengthCreator(30)
 
 const EditProfileForm = (props) => {
+
     const onCancelClick = (e) => {
         e.preventDefault()
         props.onCancelClick()
     }
+
     return <form onSubmit={props.handleSubmit}>
         <div className={styles.EditProfileForm}>
 

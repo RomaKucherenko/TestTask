@@ -5,12 +5,16 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import EditProfile from "./ProfileForm";
 import styles from "./Profile.module.css"
+import withAuthRedirect from "../HOC/withAuthRedirect";
+import Logout from "../Logout/Logout";
 
 const Profile = ({requestUserProfile, match, userProfile, updateUser, token, nullUserAction}) => {
     let [isEditing, setEditing] = useState(false)
+
     const killUserData = () => {
         nullUserAction()
     }
+
     const onEditProfileCancelClick = () => {
         setEditing(false)
     }
@@ -21,6 +25,7 @@ const Profile = ({requestUserProfile, match, userProfile, updateUser, token, nul
 
     useEffect(() => {
         requestUserProfile(match.params.userId, token)
+
         return killUserData()
     }, [match.params.userId])
 
@@ -29,6 +34,7 @@ const Profile = ({requestUserProfile, match, userProfile, updateUser, token, nul
     }
 
     return <div className={styles.Profile}>
+        <Logout/>
         <div>
             {isEditing ?
                 <EditProfile userProfile={userProfile}
@@ -65,6 +71,7 @@ let mapStateToProps = state => {
 }
 
 const profileCompose = compose(
+    withAuthRedirect,
     withRouter,
     connect(mapStateToProps, {requestUserProfile, updateUser, nullUserAction})
 )(Profile)

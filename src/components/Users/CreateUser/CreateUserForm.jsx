@@ -17,6 +17,7 @@ const CreateUserForm = (props) => {
 
     return <form  className={styles.CreateUserForm} onSubmit={props.handleSubmit}>
         <div>
+
             <div>
                 <label htmlFor="username">Username:</label>
                 <Field component={Input}
@@ -27,6 +28,7 @@ const CreateUserForm = (props) => {
                        className={"StyledInput"}
                 />
             </div>
+
             <div>
                 <label htmlFor="first_name">Имя:</label>
                 <Field component={Input}
@@ -37,6 +39,7 @@ const CreateUserForm = (props) => {
                        className={"StyledInput"}
                 />
             </div>
+
             <div>
                 <label htmlFor="last_name">Фамилия:</label>
                 <Field component={Input}
@@ -47,6 +50,7 @@ const CreateUserForm = (props) => {
                        className={"StyledInput"}
                 />
             </div>
+
             <div>
                 <label htmlFor="password">Пароль:</label>
                 <Field component={passwordInput}
@@ -59,6 +63,7 @@ const CreateUserForm = (props) => {
                        className={"StyledPasswordInput"}
                 />
             </div>
+
             <div>
                 <label htmlFor="confirmPassword">Повторите пароль:</label>
                 <Field component={passwordInput}
@@ -71,8 +76,11 @@ const CreateUserForm = (props) => {
                        className={"StyledPasswordInput"}
                 />
             </div>
+
         </div>
+
         {props.error ? <span className={formStyles.Error}>{props.error}</span> : null}
+
         <div>
             <button
                 className={styles.CreateUserButton}
@@ -93,6 +101,7 @@ const CreateUser = (props) => {
 
     const handleSubmit = (formData) => {
         let {username, last_name, first_name, password} = formData
+
         props.createNewUser({username, last_name, first_name, password, is_active: true}).then(
             response => {
                 setSubmitting(false)

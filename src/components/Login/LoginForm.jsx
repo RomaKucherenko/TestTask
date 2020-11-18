@@ -27,12 +27,20 @@ const LoginForm = (props) => {
 
         <div className={styles.LoginInputWrapper}>
 
-            <Field component={passwordInput} type={"text"}
+            <Field component={passwordInput}
                    name={"password"} placeholder={"Password"}
                    validate={[requiredField, correctPassword, max128]}
                    type={typePassword}
                    setType={setTypePassword}
                    className={"StyledPasswordInput"}/>
+
+        </div>
+        <div className={styles.LoginInputWrapper}>
+
+            <label>
+                Remember me:
+                <Field name="remember_me" component={"input"} type="checkbox"/>
+            </label>
 
         </div>
 

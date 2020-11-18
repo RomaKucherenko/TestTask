@@ -1,29 +1,38 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.module.css';
-import Login from "./components/Login/Login";
 import Users from "./components/Users/Users";
-import {connect} from "react-redux";
 import {Route} from "react-router-dom";
-import {compose} from "redux";
 import Profile from "./components/Profile/Profile";
 import CreateUser from "./components/Users/CreateUser/CreateUser";
 import styles from "./App.module.css"
-import Logout from "./components/Logout/Logout";
+import {initializeApp} from "./Redux/authReducer";
+import {connect} from "react-redux";
+import Login from "./components/Login/Login";
 
 
 const App = (props) => {
+
+    let [isInitializing, setIsInitializing] = React.useState(true)
+    useEffect(() => {
+        props.initializeApp().then(
+            () => setIsInitializing(false)
+        )
+    }, [])
+
     return (
         <div className={styles.App}>
-            {/*Проверка на авторизацию*/}
-            {props.isAuth ?
+            {isInitializing ?
+                <div>
+                    ...Loading...
+                </div>
+                :
                 <>
-                    <Logout/>
+
                     <Route exact path="/Users" render={() => <Users/>}/>
                     <Route path="/Profile/:userId" render={() => <Profile/>}/>
                     <Route path="/Users/create" render={() => <CreateUser/>}/>
+                    <Route path="/Login" render={() => <Login/>}/>
                 </>
-                :
-                <Login/>
             }
         </div>
     )
@@ -31,12 +40,8 @@ const App = (props) => {
 
 const mapStateToProps = state => {
     return {
-        isAuth: state.auth.isAuth,
         token: state.auth.token
     }
 }
 
-const appCompose = compose(
-    connect(mapStateToProps, null)
-)(App)
-export default appCompose;
+export default connect(mapStateToProps, {initializeApp})(App);

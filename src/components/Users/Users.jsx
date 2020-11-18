@@ -4,15 +4,18 @@ import {connect} from "react-redux";
 import User from "./User";
 import {sortById} from "../../utils/sortById";
 import {NavLink} from "react-router-dom";
-
 import styles from "./Users.module.css"
 import classNames from "classnames"
+import {compose} from "redux";
+import withAuthRedirect from "../HOC/withAuthRedirect";
+import Logout from "../Logout/Logout";
 
 const useRequestUsers = (requestUsers, token) => {
     useEffect(() => {
         requestUsers(token)
     }, [])
 }
+
 
 const Users = ({requestUsers, users, token}) => {
     let [pageUsers, setPageUsers] = useState(users)
@@ -21,8 +24,15 @@ const Users = ({requestUsers, users, token}) => {
 
     useRequestUsers(requestUsers, token)//Hook RequestUsers
 
+    //Слушаем reset сортировки
+    useEffect(() => {
+        setIsSortByUp(null)
+    }, [users, filterValue])
+
+
     useEffect(() => {
         setPageUsers(users)
+
     }, [users])
 
     const filterUsers = (users, value) => {
@@ -45,12 +55,13 @@ const Users = ({requestUsers, users, token}) => {
                      first_name={u.first_name}
                      last_name={u.last_name}
 
-               />
+        />
     })
 
 
     return (
         <>
+            <Logout/>
             <div className={styles.UsersHeader}>
 
                 <input value={filterValue}
@@ -96,4 +107,9 @@ const mapStateToProps = (state) => {
         token: state.auth.token
     }
 }
-export default connect(mapStateToProps, {requestUsers})(Users)
+
+const UsersCompose = compose(
+    withAuthRedirect
+)(Users)
+
+export default connect(mapStateToProps, {requestUsers})(UsersCompose)

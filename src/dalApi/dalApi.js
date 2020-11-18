@@ -41,8 +41,7 @@ export const requestUserProfileAPI = (userId, token) => {
     )
 }
 
-export const createNewUserAPI = (userData, token = "781bd9f1de084f4daa7ba2aa8a71a2eab855354e") => {
-    console.log(userData)
+export const createNewUserAPI = (userData, token) => {
     return instance.post(
         "/api/v1/users/",
         userData,
@@ -64,6 +63,20 @@ export const updateUserAPI = (userData, userId, token) => {
     return instance.patch(
         `/api/v1/users/${userId}/`,
         JSON.stringify(userData),
+        {
+            headers: {
+                authorization: `Token ${token}`,
+               "Content-Type": "application/json"
+            }
+        }
+    ).then(
+        response => response,
+        error => error.response
+    )
+}
+export const deleteUserAPI = (userId, token) => {
+    return instance.delete(
+        `/api/v1/users/${userId}/`,
         {
             headers: {
                 authorization: `Token ${token}`,

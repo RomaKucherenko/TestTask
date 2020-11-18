@@ -5,8 +5,7 @@ const SET_AUTH_DATA = "SET_AUTH_DATA"
 const NULL_AUTH_DATA = "NULL_AUTH_DATA"
 
 let initialState = {
-    isAuth: true,
-    token: "781bd9f1de084f4daa7ba2aa8a71a2eab855354e"
+    token: null
 }
 
 const authReducer = (state = initialState, action) => {
@@ -15,12 +14,11 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 token: action.token,
-                isAuth: true
             }
         case NULL_AUTH_DATA:
+            localStorage.removeItem('token')
             return {
                 token: null,
-                isAuth: false
             }
         default:
             return state
@@ -38,7 +36,13 @@ export const login = (username, password) => async dispatch => {
         dispatch(stopSubmit("login", {_error: "Incorrect Username/Password"}))
     }
     else if (response.status === 200){
-        dispatch(setAuthDataAction(response.data.token))
+        return dispatch(setAuthDataAction(response.data.token))
+    }
+}
+
+export const initializeApp = () => async dispatch => {
+    if (localStorage.getItem('token')){
+        dispatch(setAuthDataAction(localStorage.getItem('token')))
     }
 }
 

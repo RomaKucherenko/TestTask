@@ -4,11 +4,15 @@ import {connect} from "react-redux";
 import {nullUsersDataAction} from "../../Redux/usersReducer";
 import {nullAuthDataAction} from "../../Redux/authReducer";
 import {nullUserAction} from "../../Redux/profileReducer";
+import {withRouter} from "react-router-dom";
 
 function Logout(props) {
+
     const logout = () => {
+        props.history.push("/Login")
         props.logout()
     }
+
     return (
         <div className={styles.Logout}>
             <button className={styles.LogoutButton}
@@ -27,4 +31,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Logout);
+export default withRouter(connect(null, mapDispatchToProps)(Logout));

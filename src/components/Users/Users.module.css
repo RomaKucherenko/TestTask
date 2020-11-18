@@ -63,14 +63,17 @@
     display: flex;
 }
 
-.DeleteButton {
+.DeleteActionSpan {
     color: red !important;
+    cursor:pointer;
 }
 
 .SortById {
     padding-top: 5px;
     cursor: pointer;
     margin-right: 5px;
+
+
 }
 
 .SortById:hover:after {
@@ -93,6 +96,7 @@
     color: darkgreen;
     cursor: pointer;
 
+    border-bottom: 1px solid black;
     transition-duration: 200ms;
 }
 
